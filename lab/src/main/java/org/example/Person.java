@@ -49,7 +49,6 @@ public class Person {
         }
     }
 
-
     public String getOccupation() {
         return occupation;
     }
