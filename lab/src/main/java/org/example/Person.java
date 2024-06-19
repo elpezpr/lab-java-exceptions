@@ -37,11 +37,16 @@ public class Person {
         return age;
     }
 
-    public void setAge (int age) throws IllegalArgumentException{
-        if (age < 0) {
-            throw new IllegalArgumentException ("Age can't be 0");
+    public void setAge (int age) throws IllegalArgumentException {
+        try {
+            if (age < 0) {
+                throw new IllegalArgumentException("Age can't be negative");
+            }
+            this.age = age;
+        } catch (IllegalArgumentException e) {
+            System.out.println("Error: " + e.getMessage());
+            // Optionally handle the exception here, such as logging or setting a default age
         }
-        this.age = age;
     }
 
     public String getOccupation() {
@@ -74,4 +79,5 @@ public class Person {
                 ", occupation='" + occupation + '\'' +
                 '}';
     }
+
 }
