@@ -1,3 +1,5 @@
+package org.example;
+
 import java.util.Objects;
 
 public class Person {
@@ -35,15 +37,11 @@ public class Person {
         return age;
     }
 
-    public void setAge(int age) {
-        try {
-            if (age < 0) {
-                throw new IllegalArgumentException("Age can't be less than 0");
-            }
-            this.age = age;
-        } catch (IllegalArgumentException e) {
-            System.out.println("Age can't be less than 0");
+    public void setAge (int age) throws IllegalArgumentException{
+        if (age < 0) {
+            throw new IllegalArgumentException ("Age can't be 0");
         }
+        this.age = age;
     }
 
     public String getOccupation() {
