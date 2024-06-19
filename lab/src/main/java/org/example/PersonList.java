@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class PersonList {
     private List<Person> persons;
@@ -18,22 +19,22 @@ public class PersonList {
     }
 
     public Person findByName(String name) {
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
+
+        if (!name.contains(" ")) {
+            throw new IllegalArgumentException("Name must be formatted as 'firstName lastName'");
+        }
+
         try {
-            if (name == null) {
-                throw new IllegalArgumentException("Name cannot be null");
-            }
-
-            if (!name.contains(" ")) {
-                throw new IllegalArgumentException("Name must be formatted as 'firstName lastName'");
-            }
-
             for (Person person : persons) {
                 if (person.getName().equals(name)) {
                     return person;  // Return the matching person
                 }
             }
 
-            return null;
+            return null;  // Return null if no matching person is found
 
         } catch (IllegalArgumentException e) {
             System.out.println("Error: " + e.getMessage()); // Handle the exception (print or log)
@@ -59,4 +60,16 @@ public class PersonList {
         }
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PersonList that = (PersonList) o;
+        return Objects.equals(persons, that.persons);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(persons);
+    }
 }

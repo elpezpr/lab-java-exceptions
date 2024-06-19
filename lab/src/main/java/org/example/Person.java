@@ -37,17 +37,18 @@ public class Person {
         return age;
     }
 
-    public void setAge (int age) throws IllegalArgumentException {
+    public void setAge (int age) {
         try {
             if (age < 0) {
-                throw new IllegalArgumentException("Age can't be negative");
+                throw new IllegalArgumentException("Age negative");
             }
             this.age = age;
         } catch (IllegalArgumentException e) {
-            System.out.println("Error: " + e.getMessage());
-            // Optionally handle the exception here, such as logging or setting a default age
+            System.out.println(e.getMessage());
+            throw e;
         }
     }
+
 
     public String getOccupation() {
         return occupation;
